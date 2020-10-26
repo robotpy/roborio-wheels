@@ -39,18 +39,18 @@ jobs:
       run: |
         /build/venv/bin/cross-python should_build.py ${{ matrix.package }}
     
-    - if: steps.check.outputs.should_build
+    - if: steps.check.outputs.should_build == 'true'
       shell: bash
       run: |
         /build/venv/bin/cross-python whl_deps.py ${{ matrix.package }}
 
-    - if: steps.check.outputs.should_build
+    - if: steps.check.outputs.should_build == 'true'
       name: Build ${{ matrix.package }}
       shell: bash
       run: |
         /build/venv/bin/cross-python whl_build.py ${{ matrix.package }}
 
-    # - if: steps.check.outputs.should_build
+    # - if: steps.check.outputs.should_build == 'true'
     #   shell: bash
     #   run: |
     #     /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }}
@@ -58,7 +58,7 @@ jobs:
     # Upload package so that users can download the package directly
     # by just issuing a PR
     - uses: actions/upload-artifact@v2
-      if: steps.check.outputs.should_build
+      if: steps.check.outputs.should_build == 'true'
       with:
         name: ${{ matrix.package }}
         path: dist
@@ -68,7 +68,7 @@ jobs:
     #
 
     - uses: garygrossgarten/github-action-scp@v0.6.0
-      if: steps.check.outputs.should_build && github.event_name == 'push' && github.event.ref == 'refs/heads/2021'
+      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2021'
       with:
         local: dist
         remote: public_html/2021/roborio
