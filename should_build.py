@@ -51,7 +51,7 @@ def find_wheel_url(project: str, version: str, content: str):
             continue
 
         wproject, wversion, wtags = link[:-4].split("-", 2)
-        if wproject != project:
+        if wproject.lower() != project.lower():
             continue
 
         # Add to list so we can print it at the end if nothing matches
