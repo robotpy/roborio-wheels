@@ -125,4 +125,4 @@ if __name__ == "__main__":
     found = find_wheel_url(args.project, version, content)
 
     # Sets variable for use in github actions
-    print(f"::set-output should_build={str(not found).lower()}")
+    print(f"::set-output name=should_build::{str(not found).lower()}")
