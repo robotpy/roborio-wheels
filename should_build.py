@@ -78,7 +78,8 @@ def get_find_links() -> str:
     Retrieves --find-links setting for pip
     """
     content = subprocess.check_output(
-        ["pip", "--disable-pip-version-check", "config", "list"], encoding="utf-8"
+        [sys.executable, "-m", "pip", "--disable-pip-version-check", "config", "list"],
+        encoding="utf-8",
     )
     for line in content.splitlines():
         s = line.split("global.find-links=", 1)
@@ -100,7 +101,7 @@ if __name__ == "__main__":
 
     with open(args.config) as fp:
         cfg = toml.load(fp)
-    
+
     try:
         version = cfg["packages"][args.project]["version"]
     except KeyError:
