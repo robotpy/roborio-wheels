@@ -126,3 +126,4 @@ if __name__ == "__main__":
 
     # Sets variable for use in github actions
     print(f"::set-output name=should_build::{str(not found).lower()}")
+    print()
