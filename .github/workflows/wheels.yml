@@ -1,0 +1,74 @@
+---
+name: Build normal wheels
+
+on: [push, pull_request]
+
+jobs:
+
+  cross-build:
+    runs-on: ubuntu-latest
+    container: robotpy/roborio-cross-ubuntu:2021.1
+    strategy:
+      matrix:
+        
+        #
+        # Add packages here and in packages.toml!
+        #
+
+        package:
+        - cython
+        - ptvsd
+        - pydevd
+        - pyinstrument_cext
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - shell: bash
+      run: |
+        /build/venv/bin/cross-python -m \
+          pip --disable-pip-version-check install -r requirements.txt
+    
+    - shell: bash
+      id: check
+      run: |
+        /build/venv/bin/cross-python should_build.py ${{ matrix.package }}
+    
+    - if: steps.check.outputs.should_build
+      shell: bash
+      run: |
+        /build/venv/bin/cross-python whl_deps.py ${{ matrix.package }}
+
+    - if: steps.check.outputs.should_build
+      name: Build ${{ matrix.package }}
+      shell: bash
+      run: |
+        /build/venv/bin/cross-python whl_build.py ${{ matrix.package }}
+
+    # - if: steps.check.outputs.should_build
+    #   shell: bash
+    #   run: |
+    #     /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }}
+
+    # Upload package so that users can download the package directly
+    # by just issuing a PR
+    - uses: actions/upload-artifact@v2
+      if: steps.check.outputs.should_build
+      with:
+        name: ${{ matrix.package }}
+        path: dist
+    
+    #
+    # Publish wheel to robotpy site
+    #
+
+    - uses: garygrossgarten/github-action-scp@v0.6.0
+      if: steps.build.outputs.built && github.event_name == 'push' && github.event.ref == 'refs/heads/2020'
+      with:
+        local: dist
+        remote: public_html/2021/roborio
+        host: narya.tortall.net
+        username: ${{ secrets.SSH_USER }}
+        privateKey: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+

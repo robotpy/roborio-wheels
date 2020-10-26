@@ -1,0 +1,8 @@
+
+.vscode
+
+*.py[cod]
+
+*.gz
+*.ipk
+*.whl
