@@ -68,7 +68,7 @@ jobs:
     #
 
     - uses: garygrossgarten/github-action-scp@v0.6.0
-      if: steps.build.outputs.built && github.event_name == 'push' && github.event.ref == 'refs/heads/2020'
+      if: steps.check.outputs.should_build && github.event_name == 'push' && github.event.ref == 'refs/heads/2020'
       with:
         local: dist
         remote: public_html/2021/roborio
