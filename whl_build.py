@@ -29,6 +29,8 @@ if __name__ == "__main__":
         "--disable-pip-version-check",
         "-v",
         "wheel",
+        "-w",
+        "dist",
         f"{args.project}=={version}",
     ]
     result = subprocess.run(pipargs)
