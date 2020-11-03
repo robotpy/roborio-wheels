@@ -42,7 +42,8 @@ jobs:
     - if: steps.check.outputs.should_build == 'true'
       shell: bash
       run: |
-        /build/venv/bin/cross-python whl_deps.py ${{ matrix.package }}
+        /build/venv/bin/build-python whl_deps.py build ${{ matrix.package }}
+        /build/venv/bin/cross-python whl_deps.py cross ${{ matrix.package }}
 
     - if: steps.check.outputs.should_build == 'true'
       name: Build ${{ matrix.package }}

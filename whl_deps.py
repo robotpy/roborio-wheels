@@ -10,6 +10,7 @@ import toml
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("type")
     parser.add_argument("project")
     parser.add_argument("--config", default="packages.toml")
 
@@ -23,7 +24,8 @@ if __name__ == "__main__":
     except KeyError:
         parser.error(f"{args.project} not found in {args.config}")
 
-    if "build_requirements" in pkgdata:
+    reqs = pkgdata.get(f"{args.type}_pip_requirements")
+    if reqs:
         pipargs = [
             sys.executable,
             "-m",
@@ -31,5 +33,5 @@ if __name__ == "__main__":
             "--disable-pip-version-check",
             "install",
         ]
-        pipargs.extend(pkgdata["build_requirements"])
+        pipargs.extend(reqs)
         subprocess.check_call(pipargs)
