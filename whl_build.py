@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import sys
 import subprocess
 import toml
@@ -22,6 +23,11 @@ if __name__ == "__main__":
     except KeyError:
         parser.error(f"{args.project} not found in {args.config}")
 
+    env = None
+    if "environment" in pkgdata:
+        env = os.environ.copy()
+        env.update(pkgdata["environment"])
+
     pipargs = [
         sys.executable,
         "-m",
@@ -33,5 +39,5 @@ if __name__ == "__main__":
         "dist",
         f"{args.project}=={version}",
     ]
-    result = subprocess.run(pipargs)
+    result = subprocess.run(pipargs, env=env)
     exit(result.returncode)
