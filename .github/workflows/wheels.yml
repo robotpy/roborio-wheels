@@ -50,10 +50,10 @@ jobs:
       run: |
         /build/venv/bin/cross-python whl_build.py ${{ matrix.package }}
 
-    # - if: steps.check.outputs.should_build == 'true'
-    #   shell: bash
-    #   run: |
-    #     /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }}
+    - if: steps.check.outputs.should_build == 'true'
+      shell: bash
+      run: |
+        /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }}
 
     # Upload package so that users can download the package directly
     # by just issuing a PR
