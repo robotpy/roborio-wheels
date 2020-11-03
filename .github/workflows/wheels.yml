@@ -21,7 +21,7 @@ jobs:
         #
 
         package:
-        - cython
+        - Cython
         - debugpy
         - numpy
         - ptvsd
