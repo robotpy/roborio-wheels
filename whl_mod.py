@@ -66,7 +66,7 @@ if __name__ == "__main__":
     with open(args.config) as fp:
         cfg = toml.load(fp)
 
-    project, _ = args.wheel.split("-", 1)
+    project, _ = os.path.basename(args.wheel).split("-", 1)
 
     try:
         pkgdata = cfg["packages"][project]

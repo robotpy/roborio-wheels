@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import glob
 import os
 import sys
 import subprocess
@@ -40,4 +41,11 @@ if __name__ == "__main__":
         f"{args.project}=={version}",
     ]
     result = subprocess.run(pipargs, env=env)
+
+    # Sets variable for use in github actions
+    if result.returncode == 0:
+        project_cvt = args.project.replace("-", "_")
+        for f in glob.glob(f"dist/{project_cvt}-{version}-*.whl"):
+            print(f"::set-output name=wheel::{f}")
+
     exit(result.returncode)

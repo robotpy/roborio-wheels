@@ -31,6 +31,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - shell: bash
+      name: Install script requirements
       run: |
         /build/venv/bin/cross-python -m \
           pip --disable-pip-version-check install -r requirements.txt
@@ -38,26 +39,30 @@ jobs:
           pip --disable-pip-version-check install -r requirements.txt
     
     - shell: bash
+      name: Determine if ${{ matrix.package }} should be built
       id: check
       run: |
         /build/venv/bin/cross-python should_build.py ${{ matrix.package }}
     
     - if: steps.check.outputs.should_build == 'true'
+      name: Install extra requirements for ${{ matrix.package }}
       shell: bash
       run: |
         /build/venv/bin/build-python whl_deps.py build ${{ matrix.package }}
         /build/venv/bin/cross-python whl_deps.py cross ${{ matrix.package }}
 
     - if: steps.check.outputs.should_build == 'true'
-      name: Build ${{ matrix.package }}
+      name: Build ${{ matrix.package }} wheel
+      id: build
       shell: bash
       run: |
         /build/venv/bin/cross-python whl_build.py ${{ matrix.package }}
 
     - if: steps.check.outputs.should_build == 'true'
+      name: Modify ${{ matrix.package }} wheel
       shell: bash
       run: |
-        /build/venv/bin/cross-python whl_mod.py dist/${{ matrix.package }}*.whl
+        /build/venv/bin/cross-python whl_mod.py ${{ steps.build.outputs.wheel }}
 
     # Upload package so that users can download the package directly
     # by just issuing a PR
