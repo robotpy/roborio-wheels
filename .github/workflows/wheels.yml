@@ -67,7 +67,7 @@ jobs:
     # Publish wheel to robotpy site
     #
 
-    - uses: garygrossgarten/github-action-scp@v0.6.0
+    - uses: robotpy/github-action-scp@atomic
       if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2021'
       with:
         local: dist
@@ -76,4 +76,5 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         privateKey: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        atomicPut: true
 
