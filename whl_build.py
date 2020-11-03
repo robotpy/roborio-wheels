@@ -36,6 +36,8 @@ if __name__ == "__main__":
         "--disable-pip-version-check",
         "-v",
         "wheel",
+        "--no-binary",
+        ":all:",
         "-w",
         "dist",
         f"{args.project}=={version}",
