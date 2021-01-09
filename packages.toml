@@ -3,10 +3,10 @@
 version = "0.29.21"
 
 [packages.debugpy]
-version = "1.1.0"
+version = "1.2.1"
 
 [packages.numpy]
-version = "1.19.4"
+version = "1.19.5"
 build_pip_requirements = ["Cython==0.29.21"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
@@ -21,7 +21,7 @@ version = "4.3.2"
 version = "2.0.0"
 
 [packages.pyinstrument_cext]
-version = "0.2.2"
+version = "0.2.3"
 
 # TODO
 # [packages.scipy]
