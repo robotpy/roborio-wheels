@@ -12,7 +12,7 @@ jobs:
 
   cross-build:
     runs-on: ubuntu-latest
-    container: robotpy/roborio-cross-ubuntu:2021.1
+    container: robotpy/roborio-cross-ubuntu:2022.1
     strategy:
       matrix:
         
@@ -78,10 +78,10 @@ jobs:
     #
 
     - uses: robotpy/github-action-scp@atomic
-      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2021'
+      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2022'
       with:
         local: dist
-        remote: public_html/2021/roborio
+        remote: public_html/2022/roborio
         host: narya.tortall.net
         username: ${{ secrets.SSH_USER }}
         privateKey: ${{ secrets.SSH_KEY }}
