@@ -12,7 +12,7 @@ jobs:
 
   cross-build:
     runs-on: ubuntu-latest
-    container: robotpy/roborio-cross-ubuntu:2022.1
+    container: robotpy/roborio-cross-ubuntu:2022.2
     strategy:
       matrix:
         
