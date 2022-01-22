@@ -27,6 +27,7 @@ jobs:
         - ptvsd
         - pydevd
         - pyinstrument_cext
+        - zope.interface
 
     steps:
     - uses: actions/checkout@v2

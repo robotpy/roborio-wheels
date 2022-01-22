@@ -26,3 +26,6 @@ version = "0.2.4"
 # TODO
 # [packages.scipy]
 # version = "1.5.3"
+
+[packages."zope.interface"]
+version = "5.4.0"
