@@ -27,6 +27,7 @@ jobs:
         - ptvsd
         - pydevd
         - pyinstrument_cext
+        - roslibpy
 
     steps:
     - uses: actions/checkout@v2
