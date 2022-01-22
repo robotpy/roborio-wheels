@@ -23,6 +23,9 @@ version = "2.7.0"
 [packages.pyinstrument_cext]
 version = "0.2.4"
 
+[packages.roslibpy]
+version = "1.2.1"
+
 # TODO
 # [packages.scipy]
 # version = "1.5.3"
