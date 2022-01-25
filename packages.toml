@@ -12,6 +12,7 @@ cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
 
 [packages.numpy.environment]
+F77 = "arm-frc2022-linux-gnueabi-gfortran"
 F90 = "arm-frc2022-linux-gnueabi-gfortran"
 # As of NumPy 1.22.0, a vendored copy of SVML will be built on x86_64 Linux
 # hosts to provide AVX-512 acceleration of floating-point operations. When
