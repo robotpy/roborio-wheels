@@ -12,7 +12,7 @@ cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
 
 [packages.numpy.environment]
-F90 = "arm-frc2020-linux-gnueabi-gfortran"
+F90 = "arm-frc2022-linux-gnueabi-gfortran"
 
 [packages.ptvsd]
 version = "4.3.2"
