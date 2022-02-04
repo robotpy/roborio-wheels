@@ -31,6 +31,9 @@ version = "2.7.0"
 [packages.pyinstrument_cext]
 version = "0.2.4"
 
+[packages."PyYAML"]
+version = "6.0"
+
 # TODO
 # [packages.scipy]
 # version = "1.5.3"

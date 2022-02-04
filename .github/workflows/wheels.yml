@@ -27,6 +27,7 @@ jobs:
         - ptvsd
         - pydevd
         - pyinstrument_cext
+        - PyYAML
         - zope.interface
 
     steps:
