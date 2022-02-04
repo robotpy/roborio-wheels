@@ -66,6 +66,7 @@ jobs:
       shell: bash
       run: |
         /build/venv/bin/cross-python whl_mod.py ${{ steps.build.outputs.wheel }}
+        ls dist/*
 
     # Upload package so that users can download the package directly
     # by just issuing a PR
@@ -73,7 +74,7 @@ jobs:
       if: steps.check.outputs.should_build == 'true'
       with:
         name: ${{ matrix.package }}
-        path: dist
+        path: dist/${{ matrix.package }}*.whl
     
     #
     # Publish wheel to robotpy site
