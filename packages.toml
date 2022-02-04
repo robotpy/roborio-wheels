@@ -1,6 +1,6 @@
 
 [packages.Cython]
-version = "0.29.26"
+version = "0.29.27"
 
 [packages.debugpy]
 version = "1.5.1"
@@ -30,6 +30,9 @@ version = "2.7.0"
 
 [packages.pyinstrument_cext]
 version = "0.2.4"
+
+[packages."PyYAML"]
+version = "6.0"
 
 # TODO
 # [packages.scipy]
