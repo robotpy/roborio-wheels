@@ -43,4 +43,4 @@ version = "5.4.0"
 
 [packages."roslibpy"]
 version = "1.3.0"
-#cross_pip_requirements = ["setuptools==35.0.2", "cryptography==36.0.2"]
+cross_pip_requirements = ["twisted==20.3.0"]
