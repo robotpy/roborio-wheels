@@ -47,6 +47,11 @@ jobs:
       id: check
       run: |
         /build/venv/bin/cross-python should_build.py ${{ matrix.package }}
+
+    - shell: bash
+      name: Install compilers
+      run: |
+        apt update && apt install rustc gcc
     
     - if: steps.check.outputs.should_build == 'true'
       name: Install extra requirements for ${{ matrix.package }}
