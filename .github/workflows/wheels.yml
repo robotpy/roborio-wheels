@@ -51,7 +51,7 @@ jobs:
     - shell: bash
       name: Install compilers
       run: |
-        apt update && apt install rustc gcc
+        apt update && apt install rustc gcc -y
     
     - if: steps.check.outputs.should_build == 'true'
       name: Install extra requirements for ${{ matrix.package }}
