@@ -29,7 +29,8 @@ jobs:
         - pyinstrument_cext
         - PyYAML
         - zope.interface
-        - roslibpy
+        - cryptography
+      # - roslibpy
 
     steps:
     - uses: actions/checkout@v2
