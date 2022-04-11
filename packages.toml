@@ -40,3 +40,9 @@ version = "6.0"
 
 [packages."zope.interface"]
 version = "5.4.0"
+
+[packages.adafruit-circuitpython-vl6180x]
+version = "1.4.3"
+
+[packages.adafruit-circuitpython-tca9548a]
+version = "0.5.2"

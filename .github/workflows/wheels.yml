@@ -29,6 +29,8 @@ jobs:
         - pyinstrument_cext
         - PyYAML
         - zope.interface
+        - adafruit-circuitpython-vl6180x
+        - adafruit-circuitpython-tca9548a
 
     steps:
     - uses: actions/checkout@v2
