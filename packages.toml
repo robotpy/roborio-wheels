@@ -1,19 +1,19 @@
 
 [packages.Cython]
-version = "0.29.27"
+version = "0.29.32"
 
 [packages.debugpy]
-version = "1.5.1"
+version = "1.6.3"
 
 [packages.numpy]
-version = "1.22.2"
-build_pip_requirements = ["Cython==0.29.26"]
+version = "1.23.4"
+build_pip_requirements = ["Cython==0.29.32"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
 
 [packages.numpy.environment]
-F77 = "arm-frc2022-linux-gnueabi-gfortran"
-F90 = "arm-frc2022-linux-gnueabi-gfortran"
+F77 = "arm-frc2023-linux-gnueabi-gfortran"
+F90 = "arm-frc2023-linux-gnueabi-gfortran"
 # As of NumPy 1.22.0, a vendored copy of SVML will be built on x86_64 Linux
 # hosts to provide AVX-512 acceleration of floating-point operations. When
 # using an x86_64 Linux build system to cross compile NumPy for hosts other
@@ -26,7 +26,7 @@ NPY_DISABLE_SVML = "1"
 version = "4.3.2"
 
 [packages.pydevd]
-version = "2.7.0"
+version = "2.9.1"
 
 [packages.pyinstrument_cext]
 version = "0.2.4"
@@ -39,4 +39,4 @@ version = "6.0"
 # version = "1.5.3"
 
 [packages."zope.interface"]
-version = "5.4.0"
+version = "5.5.0"
