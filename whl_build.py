@@ -36,6 +36,7 @@ if __name__ == "__main__":
         "--disable-pip-version-check",
         "-v",
         "wheel",
+        "--no-build-isolation",
         "--no-binary",
         ":all:",
         "-w",
