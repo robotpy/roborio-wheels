@@ -6,7 +6,7 @@ version = "0.29.32"
 version = "1.6.3"
 
 [packages.numpy]
-version = "1.23.5"
+version = "1.24.1"
 build_pip_requirements = ["Cython==0.29.32", "setuptools==59.2.0", "wheel==0.37.0"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
