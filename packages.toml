@@ -28,8 +28,8 @@ version = "4.3.2"
 [packages.pydevd]
 version = "2.9.1"
 
-[packages.pyinstrument_cext]
-version = "0.2.4"
+[packages.pyinstrument]
+version = "4.4.0"
 
 [packages."PyYAML"]
 version = "6.0"
