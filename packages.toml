@@ -32,6 +32,9 @@ mod_version = "1.8.0+r2"
 # # platform-specific library:
 # NPY_DISABLE_SVML = "1"
 
+[packages.MarkupSafe]
+version = "2.1.1"
+
 [packages.numpy]
 version = "1.25.2"
 mod_version = "1.25.2+r2"
@@ -66,6 +69,9 @@ mod_version = "6.0.1+r2"
 build_pip_requirements = [
     "Cython<3.0",
 ]
+
+[packages.scalene]
+version = "1.5.19"
 
 # TODO
 # [packages.scipy]
