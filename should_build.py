@@ -16,6 +16,7 @@ from urllib.request import urlopen
 from packaging.tags import parse_tag, sys_tags
 import toml
 
+
 # https://www.mschweighauser.com/fast-url-parsing-with-python/
 class LinkFinder(HTMLParser):
     @classmethod
@@ -37,7 +38,6 @@ class LinkFinder(HTMLParser):
 
 
 def find_wheel_url(project: str, version: str, content: str):
-
     project = project.replace("-", "_")
     tags = set(sys_tags())
 
@@ -88,7 +88,6 @@ def get_find_links() -> str:
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument("project")
     parser.add_argument("--config", default="packages.toml")
