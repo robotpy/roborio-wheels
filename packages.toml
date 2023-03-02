@@ -3,7 +3,7 @@
 version = "0.29.32"
 
 [packages.debugpy]
-version = "1.6.3"
+version = "1.6.6"
 
 [packages.numpy]
 version = "1.24.2"
