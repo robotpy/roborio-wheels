@@ -26,7 +26,7 @@ NPY_DISABLE_SVML = "1"
 version = "4.3.2"
 
 [packages.pydantic]
-version = "1.10.4"
+version = "1.10.12"
 build_pip_requirements = ["Cython==0.29.32"]
 
 [packages.pydevd]
