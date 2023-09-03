@@ -25,6 +25,7 @@ jobs:
         - debugpy
         - numpy
         - ptvsd
+        - pydantic
         - pydevd
         - pyinstrument
         - PyYAML
