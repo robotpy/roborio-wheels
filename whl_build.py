@@ -37,6 +37,7 @@ if __name__ == "__main__":
         "-v",
         "wheel",
         "--no-build-isolation",
+        "--no-deps",
         "--no-binary",
         ":all:",
         "-w",
