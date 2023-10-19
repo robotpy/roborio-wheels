@@ -1,19 +1,49 @@
 
 [packages.Cython]
-version = "0.29.32"
+version = "3.0.4"
+
+
+[packages.robotpy-libgfortran5]
+version = "12.1.0+r5"
 
 [packages.debugpy]
-version = "1.6.6"
+version = "1.8.0"
+
+# NumPy cross compilation seems to be broken > 1.26?
+# - https://github.com/mesonbuild/meson-python/issues/321
+# [packages.numpy]
+# version = "1.26.1"
+# build_pip_requirements = [
+#     "Cython==3.0.4",
+#     "setuptools==68.2.2",
+#     "wheel==0.41.2",
+#     "pyproject-metadata==0.7.1",
+#     "ninja==1.11.1.1",
+# ]
+# cross_pip_requirements = ["robotpy-openblas-dev"]
+# install_requirements = ["robotpy-openblas"]
+
+# [packages.numpy.environment]
+# NINJA = "/build/venv/build/bin/ninja"
+# F77 = "arm-frc2024-linux-gnueabi-gfortran"
+# F90 = "arm-frc2024-linux-gnueabi-gfortran"
+# # As of NumPy 1.22.0, a vendored copy of SVML will be built on x86_64 Linux
+# # hosts to provide AVX-512 acceleration of floating-point operations. When
+# # using an x86_64 Linux build system to cross compile NumPy for hosts other
+# # than x86_64 Linux, set the environment variable NPY_DISABLE_SVML to prevent
+# # the NumPy build script from incorrectly attempting to cross-compile this
+# # platform-specific library:
+# NPY_DISABLE_SVML = "1"
 
 [packages.numpy]
-version = "1.24.2"
-build_pip_requirements = ["Cython==0.29.32", "setuptools==59.2.0", "wheel==0.37.0"]
+version = "1.25.2"
+build_pip_requirements = ["Cython==0.29.34,<3.0", "setuptools==68.2.2", "wheel==0.41.2"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
 
 [packages.numpy.environment]
-F77 = "arm-frc2023-linux-gnueabi-gfortran"
-F90 = "arm-frc2023-linux-gnueabi-gfortran"
+F77 = "arm-frc2024-linux-gnueabi-gfortran"
+F90 = "arm-frc2024-linux-gnueabi-gfortran"
 # As of NumPy 1.22.0, a vendored copy of SVML will be built on x86_64 Linux
 # hosts to provide AVX-512 acceleration of floating-point operations. When
 # using an x86_64 Linux build system to cross compile NumPy for hosts other
@@ -22,21 +52,22 @@ F90 = "arm-frc2023-linux-gnueabi-gfortran"
 # platform-specific library:
 NPY_DISABLE_SVML = "1"
 
-[packages.ptvsd]
-version = "4.3.2"
 
 [packages.pydevd]
-version = "2.9.1"
+version = "2.10.0"
 
 [packages.pyinstrument]
-version = "4.4.0"
+version = "4.6.0"
 
 [packages."PyYAML"]
-version = "6.0"
+version = "6.0.1"
+build_pip_requirements = [
+    "Cython<3.0",
+]
 
 # TODO
 # [packages.scipy]
 # version = "1.5.3"
 
 [packages."zope.interface"]
-version = "5.5.0"
+version = "6.1"

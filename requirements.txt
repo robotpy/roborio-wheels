@@ -1,2 +1,5 @@
 
 packaging
+
+# strictly speaking, not a dependency, but annoying to not have
+setuptools

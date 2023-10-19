@@ -12,6 +12,7 @@ import sys
 import typing
 from urllib.parse import unquote_plus
 from urllib.request import urlopen
+from urllib.error import HTTPError
 
 from packaging.tags import parse_tag, sys_tags
 import tomllib
@@ -46,7 +47,7 @@ def find_wheel_url(project: str, version: str, content: str):
     found = False
 
     for link in links:
-        link = posixpath.basename(unquote_plus(link))
+        link = posixpath.basename(link)
         if not link.endswith(".whl"):
             continue
 
@@ -73,16 +74,16 @@ def find_wheel_url(project: str, version: str, content: str):
     return False
 
 
-def get_find_links() -> str:
+def get_index_url() -> str:
     """
-    Retrieves --find-links setting for pip
+    Retrieves the project URL
     """
     content = subprocess.check_output(
         [sys.executable, "-m", "pip", "--disable-pip-version-check", "config", "list"],
         encoding="utf-8",
     )
     for line in content.splitlines():
-        s = line.split("global.find-links=", 1)
+        s = line.split("extra-index-url=", 1)
         if len(s) == 2:
             return s[1].strip("'")
 
@@ -112,14 +113,27 @@ if __name__ == "__main__":
     else:
         url = args.url
         if not url:
-            url = get_find_links()
+            url = get_index_url()
 
         if not url:
-            parser.error("URL to parse must be specified!")
+            parser.error("Index URL to parse must be specified!")
 
         print("Checking", url)
-        with urlopen(url) as f:
-            content = f.read().decode("utf-8")
+
+        # Since we're using a real index, construct the name
+        if url.endswith("/"):
+            url = url[:-1]
+
+        project_url = f"{url}/{args.project}/{version}/"
+        print("..", project_url)
+
+        try:
+            with urlopen(project_url) as f:
+                content = f.read().decode("utf-8")
+        except HTTPError as e:
+            if e.code != 404:
+                raise
+            content = ""
 
     found = find_wheel_url(args.project, version, content)
 

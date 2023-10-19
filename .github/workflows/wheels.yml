@@ -12,7 +12,7 @@ jobs:
 
   cross-build:
     runs-on: ubuntu-latest
-    container: robotpy/roborio-cross-ubuntu:2023.1
+    container: wpilib/roborio-cross-ubuntu:2024-22.04-py312
     strategy:
       matrix:
         
@@ -32,6 +32,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    # temporary fix
+    - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024/simple
 
     - shell: bash
       name: Install script requirements
@@ -80,14 +83,11 @@ jobs:
     # Publish wheel to robotpy site
     #
 
-    - uses: robotpy/github-action-scp@atomic
-      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2023'
+    - name: Publish package to WPILib artifactory
+      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2024'
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        local: dist
-        remote: public_html/2023/roborio
-        host: narya.tortall.net
-        username: ${{ secrets.SSH_USER }}
-        privateKey: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        atomicPut: true
+        user: ${{ secrets.WPI_ARTIFACTORY_USERNAME }}
+        password: ${{ secrets.WPI_ARTIFACTORY_TOKEN }}
+        repository-url: https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024-local
 
