@@ -24,7 +24,6 @@ jobs:
         - Cython
         - debugpy
         - numpy
-        - ptvsd
         - pydevd
         - pyinstrument
         - PyYAML

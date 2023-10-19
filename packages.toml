@@ -2,10 +2,6 @@
 [packages.Cython]
 version = "3.0.4"
 
-
-[packages.robotpy-libgfortran5]
-version = "12.1.0+r5"
-
 [packages.debugpy]
 version = "1.8.0"
 
