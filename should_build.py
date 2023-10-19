@@ -47,6 +47,7 @@ def find_wheel_url(project: str, version: str, content: str):
     found = False
 
     for link in links:
+        link = link.split("#")[0]
         link = posixpath.basename(link)
         if not link.endswith(".whl"):
             continue
@@ -124,7 +125,7 @@ if __name__ == "__main__":
         if url.endswith("/"):
             url = url[:-1]
 
-        project_url = f"{url}/{args.project}/{version}/"
+        project_url = f"{url}/{args.project}/"
         print("..", project_url)
 
         try:
