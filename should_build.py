@@ -14,7 +14,7 @@ from urllib.parse import unquote_plus
 from urllib.request import urlopen
 
 from packaging.tags import parse_tag, sys_tags
-import toml
+import tomllib
 
 
 # https://www.mschweighauser.com/fast-url-parsing-with-python/
@@ -98,8 +98,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    with open(args.config) as fp:
-        cfg = toml.load(fp)
+    with open(args.config, "rb") as fp:
+        cfg = tomllib.load(fp)
 
     try:
         version = cfg["packages"][args.project]["version"]

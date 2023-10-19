@@ -5,7 +5,7 @@
 import argparse
 import sys
 import subprocess
-import toml
+import tomllib
 
 
 if __name__ == "__main__":
@@ -16,8 +16,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    with open(args.config) as fp:
-        cfg = toml.load(fp)
+    with open(args.config, "rb") as fp:
+        cfg = tomllib.load(fp)
 
     try:
         pkgdata = cfg["packages"][args.project]
