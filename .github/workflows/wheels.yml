@@ -30,7 +30,7 @@ jobs:
         - zope.interface
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # temporary fix
     - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024/simple
