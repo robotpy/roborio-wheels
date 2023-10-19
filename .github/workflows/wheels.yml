@@ -72,6 +72,7 @@ jobs:
 
     # Some packages are stupid
     - name: Remove extra wheels
+      if: steps.check.outputs.should_build == 'true'
       shell: bash
       run: |
         mkdir tmp
