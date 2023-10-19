@@ -70,13 +70,22 @@ jobs:
         /build/venv/bin/cross-python whl_mod.py ${{ steps.build.outputs.wheel }}
         ls dist/*
 
+    # Some packages are stupid
+    - name: Remove extra wheels
+      shell: bash
+      run: |
+        mkdir tmp
+        mv dist/${{ matrix.package }}*.whl tmp/
+        rm -rf dist
+        mv tmp dist
+
     # Upload package so that users can download the package directly
     # by just issuing a PR
     - uses: actions/upload-artifact@v2
       if: steps.check.outputs.should_build == 'true'
       with:
         name: ${{ matrix.package }}
-        path: dist/${{ matrix.package }}*.whl
+        path: dist/
     
     #
     # Publish wheel to robotpy site
