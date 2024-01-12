@@ -1,6 +1,6 @@
 
 [packages.Cython]
-version = "3.0.4"
+version = "3.0.8"
 
 [packages.debugpy]
 version = "1.8.0"
