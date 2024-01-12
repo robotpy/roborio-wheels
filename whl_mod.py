@@ -6,10 +6,20 @@
 import argparse
 import os.path
 import sys
+import sysconfig
 import subprocess
 import tomllib
 import tempfile
 import typing
+
+
+def get_strip_exe():
+    strip_exe = "strip"
+    if getattr(sys, "cross_compiling", False):
+        ar_exe = sysconfig.get_config_var("AR")
+        if ar_exe.endswith("-ar"):
+            strip_exe = f"{ar_exe[:-3]}-strip"
+    return strip_exe
 
 
 def add_requirements_to_wheel(
@@ -18,6 +28,8 @@ def add_requirements_to_wheel(
     whldir = os.path.dirname(wheel)
     if whldir == "":
         whldir = "."
+
+    strip_exe = get_strip_exe()
 
     with tempfile.TemporaryDirectory() as tmpdir:
         # unpack the wheel
@@ -50,6 +62,15 @@ def add_requirements_to_wheel(
             fp.seek(0)
             fp.writelines(lines)
             fp.truncate()
+
+        # Strip the binaries
+        for root, _, files in os.walk(unpacked_root):
+            for fname in files:
+                full_fname = os.path.join(root, fname)
+                if fname.endswith("so") or ".so." in fname:
+                    args = [strip_exe, full_fname]
+                    print("+", *args)
+                    subprocess.check_call(args)
 
         # pack the wheel back up
         args = [sys.executable, "-m", "wheel", "pack", unpacked_root, "-d", whldir]
