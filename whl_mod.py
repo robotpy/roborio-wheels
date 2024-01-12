@@ -23,7 +23,12 @@ def get_strip_exe():
 
 
 def add_requirements_to_wheel(
-    wheel: str, project: str, version: str, reqs: typing.List[str]
+    wheel: str,
+    project: str,
+    version: str,
+    out_version: str,
+    strip_fail_ok: bool,
+    reqs: typing.List[str],
 ):
     whldir = os.path.dirname(wheel)
     if whldir == "":
@@ -39,20 +44,28 @@ def add_requirements_to_wheel(
         unpacked_root = os.path.join(tmpdir, f"{project}-{version}")
 
         # Find and modify the metadata record
-        metadata_path = os.path.join(
-            unpacked_root, f"{project}-{version}.dist-info", "METADATA"
-        )
+        dist_info_path = os.path.join(unpacked_root, f"{project}-{version}.dist-info")
+        metadata_path = os.path.join(dist_info_path, "METADATA")
+
         with open(metadata_path, "r+") as fp:
             lines = fp.readlines()
 
-            # Find the first empty line and insert our extra requirements there
-            i = 0
-            for i, line in enumerate(lines):
-                if line.strip() == "":
-                    break
+            # Insert additional requirements?
+            if reqs:
+                i = 0
+                for i, line in enumerate(lines):
+                    if line.strip() == "":
+                        break
 
-            for req in reversed(reqs):
-                lines.insert(i, f"Requires-Dist: {req}\n")
+                for req in reversed(reqs):
+                    lines.insert(i, f"Requires-Dist: {req}\n")
+
+            # If we're changing the version, do that too
+            if version != out_version:
+                for i in range(len(lines)):
+                    if lines[i].startswith("Version:"):
+                        lines[i] = f"Version: {out_version}\n"
+                        break
 
             print("-" * 72)
             for line in lines:
@@ -70,7 +83,24 @@ def add_requirements_to_wheel(
                 if fname.endswith("so") or ".so." in fname:
                     args = [strip_exe, full_fname]
                     print("+", *args)
-                    subprocess.check_call(args)
+                    try:
+                        subprocess.check_call(args)
+                    except subprocess.CalledProcessError as e:
+                        if strip_fail_ok:
+                            print(e)
+                        else:
+                            raise
+
+        # If we are changing the version, then delete RECORD and rename dist-info
+        if version != out_version:
+            os.unlink(os.path.join(dist_info_path, "RECORD"))
+            new_dist_info_path = os.path.join(
+                unpacked_root, f"{project}-{out_version}.dist-info"
+            )
+            os.rename(dist_info_path, new_dist_info_path)
+
+        # Everything worked, delete the old wheel
+        os.unlink(wheel)
 
         # pack the wheel back up
         args = [sys.executable, "-m", "wheel", "pack", unpacked_root, "-d", whldir]
@@ -95,6 +125,14 @@ if __name__ == "__main__":
     except KeyError:
         parser.error(f"{project} not found in {args.config}")
 
+    out_version = pkgdata.get("mod_version", None)
+    if out_version is None:
+        out_version = version
+
+    strip_fail_ok = pkgdata.get("strip_fail_ok", False)
+
     reqs = pkgdata.get("install_requirements")
-    if reqs:
-        add_requirements_to_wheel(args.wheel, project, version, reqs)
+    if reqs or out_version != version:
+        add_requirements_to_wheel(
+            args.wheel, project, version, out_version, strip_fail_ok, reqs
+        )
