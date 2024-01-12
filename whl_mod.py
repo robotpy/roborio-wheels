@@ -27,6 +27,7 @@ def add_requirements_to_wheel(
     project: str,
     version: str,
     out_version: str,
+    strip_fail_ok: bool,
     reqs: typing.List[str],
 ):
     whldir = os.path.dirname(wheel)
@@ -82,7 +83,13 @@ def add_requirements_to_wheel(
                 if fname.endswith("so") or ".so." in fname:
                     args = [strip_exe, full_fname]
                     print("+", *args)
-                    subprocess.check_call(args)
+                    try:
+                        subprocess.check_call(args)
+                    except subprocess.CalledProcessError as e:
+                        if strip_fail_ok:
+                            print(e)
+                        else:
+                            raise
 
         # If we are changing the version, then delete RECORD and rename dist-info
         if version != out_version:
@@ -122,6 +129,10 @@ if __name__ == "__main__":
     if out_version is None:
         out_version = version
 
+    strip_fail_ok = pkgdata.get("strip_fail_ok", False)
+
     reqs = pkgdata.get("install_requirements")
     if reqs or out_version != version:
-        add_requirements_to_wheel(args.wheel, project, version, out_version, reqs)
+        add_requirements_to_wheel(
+            args.wheel, project, version, out_version, strip_fail_ok, reqs
+        )

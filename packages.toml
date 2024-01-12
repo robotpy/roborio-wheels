@@ -54,6 +54,7 @@ NPY_DISABLE_SVML = "1"
 [packages.pydevd]
 version = "2.10.0"
 mod_version = "2.10.0+r2"
+strip_fail_ok = true
 
 [packages.pyinstrument]
 version = "4.6.0"
