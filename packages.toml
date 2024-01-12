@@ -4,6 +4,7 @@ version = "3.0.8"
 
 [packages.debugpy]
 version = "1.8.0"
+mod_version = "1.8.0+r2"
 
 # NumPy cross compilation seems to be broken > 1.26?
 # - https://github.com/mesonbuild/meson-python/issues/321
@@ -33,6 +34,7 @@ version = "1.8.0"
 
 [packages.numpy]
 version = "1.25.2"
+mod_version = "1.25.2+r2"
 build_pip_requirements = ["Cython==0.29.34,<3.0", "setuptools==68.2.2", "wheel==0.41.2"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
@@ -51,12 +53,15 @@ NPY_DISABLE_SVML = "1"
 
 [packages.pydevd]
 version = "2.10.0"
+mod_version = "2.10.0+r2"
 
 [packages.pyinstrument]
 version = "4.6.0"
+mod_version = "4.6.0+r2"
 
 [packages."PyYAML"]
 version = "6.0.1"
+mod_version = "6.0.1+r2"
 build_pip_requirements = [
     "Cython<3.0",
 ]
@@ -67,3 +72,4 @@ build_pip_requirements = [
 
 [packages."zope.interface"]
 version = "6.1"
+mod_version = "6.1+r2"
