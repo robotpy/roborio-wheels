@@ -104,7 +104,9 @@ if __name__ == "__main__":
         cfg = tomllib.load(fp)
 
     try:
-        version = cfg["packages"][args.project]["version"]
+        version = cfg["packages"][args.project].get("mod_version")
+        if version is None:
+            version = cfg["packages"][args.project]["version"]
     except KeyError:
         parser.error(f"{args.project} not found in {args.config}")
 
