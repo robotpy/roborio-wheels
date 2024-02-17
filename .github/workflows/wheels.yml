@@ -23,10 +23,12 @@ jobs:
         package:
         - Cython
         - debugpy
+        - MarkupSafe
         - numpy
         - pydevd
         - pyinstrument
         - PyYAML
+        - scalene
         - zope.interface
 
     steps:
