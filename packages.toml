@@ -1,3 +1,5 @@
+[packages.cffi]
+version = "1.16.0"
 
 [packages.Cython]
 version = "3.0.8"
