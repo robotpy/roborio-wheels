@@ -27,6 +27,7 @@ jobs:
         - pydevd
         - pyinstrument
         - PyYAML
+        - yappi
         - zope.interface
 
     steps:
