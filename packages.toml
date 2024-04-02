@@ -74,3 +74,6 @@ build_pip_requirements = [
 [packages."zope.interface"]
 version = "6.1"
 mod_version = "6.1+r2"
+
+[packages.yappi]
+version = "1.5.1"
