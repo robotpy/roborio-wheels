@@ -24,6 +24,7 @@ jobs:
         - Cython
         - debugpy
         - numpy
+        - orjson
         - pydevd
         - pyinstrument
         - PyYAML
