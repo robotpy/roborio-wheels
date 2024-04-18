@@ -77,3 +77,6 @@ mod_version = "6.1+r2"
 
 [packages.yappi]
 version = "1.5.1"
+
+[packages.orjson]
+version = "3.10.1"
