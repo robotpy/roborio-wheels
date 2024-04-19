@@ -80,3 +80,4 @@ version = "1.5.1"
 
 [packages.orjson]
 version = "3.10.1"
+build_pip_requirements = ["maturin==1.5.1"]
