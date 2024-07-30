@@ -29,6 +29,7 @@ jobs:
         - PyYAML
         - yappi
         - zope.interface
+        - limelightlib-python
 
     steps:
     - uses: actions/checkout@v3
