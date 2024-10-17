@@ -12,7 +12,7 @@ jobs:
 
   cross-build:
     runs-on: ubuntu-latest
-    container: wpilib/roborio-cross-ubuntu:2024-22.04-py312
+    container: wpilib/roborio-cross-ubuntu:2025-22.04-py313
     strategy:
       matrix:
         
@@ -34,7 +34,7 @@ jobs:
     - uses: actions/checkout@v3
 
     # temporary fix
-    - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024/simple
+    - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025/simple
 
     - shell: bash
       name: Install script requirements
@@ -94,10 +94,10 @@ jobs:
     #
 
     - name: Publish package to WPILib artifactory
-      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2024'
+      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2025'
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: ${{ secrets.WPI_ARTIFACTORY_USERNAME }}
         password: ${{ secrets.WPI_ARTIFACTORY_TOKEN }}
-        repository-url: https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024-local
+        repository-url: https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025-local
 
