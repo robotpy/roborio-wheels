@@ -7,7 +7,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: psf/black@stable
 
   cross-build:
@@ -31,7 +31,7 @@ jobs:
         - zope.interface
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     # temporary fix
     - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025/simple
@@ -83,7 +83,7 @@ jobs:
 
     # Upload package so that users can download the package directly
     # by just issuing a PR
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: steps.check.outputs.should_build == 'true'
       with:
         name: ${{ matrix.package }}
