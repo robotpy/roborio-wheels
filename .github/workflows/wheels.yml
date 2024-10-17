@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     container: wpilib/roborio-cross-ubuntu:2025-22.04-py313
     strategy:
+      fail-fast: false
       matrix:
         
         #
