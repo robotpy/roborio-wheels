@@ -24,9 +24,9 @@ if __name__ == "__main__":
     except KeyError:
         parser.error(f"{args.project} not found in {args.config}")
 
-    env = None
+    env = os.environ.copy()
+    env["PATH"] = f"{env['PATH']}:/build/venv/build/bin"
     if "environment" in pkgdata:
-        env = os.environ.copy()
         env.update(pkgdata["environment"])
 
     pipargs = [
