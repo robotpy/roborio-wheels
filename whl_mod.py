@@ -4,6 +4,8 @@
 #
 
 import argparse
+import email.parser
+import email.policy
 import os.path
 import sys
 import sysconfig
@@ -47,34 +49,19 @@ def add_requirements_to_wheel(
         dist_info_path = os.path.join(unpacked_root, f"{project}-{version}.dist-info")
         metadata_path = os.path.join(dist_info_path, "METADATA")
 
-        with open(metadata_path, "r+") as fp:
-            lines = fp.readlines()
+        with open(metadata_path, "rb") as fp:
+            metadata = p = email.parser.BytesParser(policy=email.policy.compat32).parse(
+                fp
+            )
 
-            # Insert additional requirements?
-            if reqs:
-                i = 0
-                for i, line in enumerate(lines):
-                    if line.strip() == "":
-                        break
+        for req in reqs:
+            metadata.add_header("Requires-Dist", req)
 
-                for req in reversed(reqs):
-                    lines.insert(i, f"Requires-Dist: {req}\n")
+        if version != out_version:
+            metadata.replace_header("Version", out_version)
 
-            # If we're changing the version, do that too
-            if version != out_version:
-                for i in range(len(lines)):
-                    if lines[i].startswith("Version:"):
-                        lines[i] = f"Version: {out_version}\n"
-                        break
-
-            print("-" * 72)
-            for line in lines:
-                print(line.strip())
-            print("-" * 72)
-
-            fp.seek(0)
-            fp.writelines(lines)
-            fp.truncate()
+        with open(metadata_path, "wb") as fp:
+            fp.write(metadata.as_bytes())
 
         # Strip the binaries
         for root, _, files in os.walk(unpacked_root):
