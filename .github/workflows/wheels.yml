@@ -38,6 +38,12 @@ jobs:
     - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025/simple
 
     - shell: bash
+      name: install meson cross-file
+      run: |
+        mkdir -p ~/.local/share/meson/cross
+        cp meson-cross-roborio.txt ~/.local/share/meson/cross
+
+    - shell: bash
       name: Install script requirements
       run: |
         /build/venv/bin/cross-python -m \

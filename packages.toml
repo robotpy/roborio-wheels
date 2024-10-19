@@ -33,23 +33,18 @@ version = "1.8.7"
 # NPY_DISABLE_SVML = "1"
 
 [packages.numpy]
-version = "1.25.2"
-mod_version = "1.25.2+r2"
-build_pip_requirements = ["Cython==0.29.34,<3.0", "setuptools==68.2.2", "wheel==0.41.2"]
+version = "2.1.2"
+#mod_version = "1.25.2+r2"
+build_pip_requirements = ["Cython>=3.0.6", "meson-python>=0.15.0", "ninja", "pkgconf"]
 cross_pip_requirements = ["robotpy-openblas-dev"]
 install_requirements = ["robotpy-openblas"]
-
-[packages.numpy.environment]
-F77 = "arm-frc2024-linux-gnueabi-gfortran"
-F90 = "arm-frc2024-linux-gnueabi-gfortran"
-# As of NumPy 1.22.0, a vendored copy of SVML will be built on x86_64 Linux
-# hosts to provide AVX-512 acceleration of floating-point operations. When
-# using an x86_64 Linux build system to cross compile NumPy for hosts other
-# than x86_64 Linux, set the environment variable NPY_DISABLE_SVML to prevent
-# the NumPy build script from incorrectly attempting to cross-compile this
-# platform-specific library:
-NPY_DISABLE_SVML = "1"
-
+pip_args = [
+    "--config-settings=setup-args=-Dblas=openblas",
+    "--config-settings=setup-args=-Dallow-noblas=false",
+    "--config-settings=setup-args=--cross-file=meson-cross-roborio.txt",
+]
+[packages.numpy.add-files]
+"numpy/_distributor_init_local.py" = "numpy-files/_distributor_init_local.py"
 
 [packages.pydevd]
 version = "3.1.0"

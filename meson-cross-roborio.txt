@@ -1,0 +1,20 @@
+# TODO: probably should just ship this in the cross-compilation docker container?
+
+[binaries]
+c = 'arm-frc2024-linux-gnueabi-gcc'
+cpp = 'arm-frc2024-linux-gnueabi-g++'
+ar = 'arm-frc2024-linux-gnueabi-ar'
+strip = 'arm-frc2024-linux-gnueabi-strip'
+gfortran = 'arm-frc2024-linux-gnueabi-gfortran'
+
+# requires pkgconf to be installed in build-pip
+pkg-config = '/build/venv/build/bin/pkgconf'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'arm'
+cpu = 'armv7l'
+endian = 'little'
+
+[properties]
+longdouble_format = 'IEEE_DOUBLE_LE'
