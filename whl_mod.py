@@ -7,6 +7,7 @@ import argparse
 import email.parser
 import email.policy
 import os.path
+import shutil
 import sys
 import sysconfig
 import subprocess
@@ -31,6 +32,7 @@ def add_requirements_to_wheel(
     out_version: str,
     strip_fail_ok: bool,
     reqs: typing.List[str],
+    added_files: typing.Dict[str, str],
 ):
     whldir = os.path.dirname(wheel)
     if whldir == "":
@@ -86,6 +88,11 @@ def add_requirements_to_wheel(
             )
             os.rename(dist_info_path, new_dist_info_path)
 
+        # Add any files
+        if added_files:
+            for dst, src in added_files.items():
+                shutil.copy(src, os.path.join(unpacked_root, dst))
+
         # Everything worked, delete the old wheel
         os.unlink(wheel)
 
@@ -118,8 +125,10 @@ if __name__ == "__main__":
 
     strip_fail_ok = pkgdata.get("strip_fail_ok", False)
 
+    added_files = pkgdata.get("add-files")
+
     reqs = pkgdata.get("install_requirements")
-    if reqs or out_version != version:
+    if reqs or out_version != version or added_files:
         add_requirements_to_wheel(
-            args.wheel, project, version, out_version, strip_fail_ok, reqs
+            args.wheel, project, version, out_version, strip_fail_ok, reqs, added_files
         )

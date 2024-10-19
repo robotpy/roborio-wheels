@@ -42,8 +42,12 @@ if __name__ == "__main__":
         ":all:",
         "-w",
         "dist",
-        f"{args.project}=={version}",
     ]
+    if "pip_args" in pkgdata:
+        pipargs += pkgdata["pip_args"]
+
+    pipargs.append(f"{args.project}=={version}")
+
     result = subprocess.run(pipargs, env=env)
 
     # Sets variable for use in github actions
