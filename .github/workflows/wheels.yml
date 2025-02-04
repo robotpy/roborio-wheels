@@ -76,7 +76,7 @@ jobs:
       name: Modify ${{ matrix.package }} wheel
       shell: bash
       run: |
-        /build/venv/bin/cross-python whl_mod.py ${{ steps.build.outputs.wheel }}
+        /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }} ${{ steps.build.outputs.wheel }}
         ls dist/*
 
     # Some packages are stupid

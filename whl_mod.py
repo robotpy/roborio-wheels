@@ -103,6 +103,7 @@ def add_requirements_to_wheel(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("project")
     parser.add_argument("wheel")
     parser.add_argument("--config", default="packages.toml")
 
@@ -111,13 +112,13 @@ if __name__ == "__main__":
     with open(args.config, "rb") as fp:
         cfg = tomllib.load(fp)
 
-    project, _ = os.path.basename(args.wheel).split("-", 1)
-
     try:
-        pkgdata = cfg["packages"][project]
+        pkgdata = cfg["packages"][args.project]
         version = pkgdata["version"]
     except KeyError:
-        parser.error(f"{project} not found in {args.config}")
+        parser.error(f"{args.project} not found in {args.config}")
+
+    project = pkgdata.get("name", args.project)
 
     out_version = pkgdata.get("mod_version", None)
     if out_version is None:
