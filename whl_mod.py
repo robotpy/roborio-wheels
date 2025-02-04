@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
     added_files = pkgdata.get("add-files")
 
-    reqs = pkgdata.get("install_requirements")
+    reqs = pkgdata.get("install_requirements", [])
     if reqs or out_version != version or added_files:
         add_requirements_to_wheel(
             args.wheel, project, version, out_version, strip_fail_ok, reqs, added_files
