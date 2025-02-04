@@ -25,6 +25,7 @@ jobs:
         - Cython
         - debugpy
         - numpy
+        - numpy-no-openblas
         - pydevd
         - pyinstrument
         - PyYAML
@@ -83,10 +84,7 @@ jobs:
       if: steps.check.outputs.should_build == 'true'
       shell: bash
       run: |
-        mkdir tmp
-        mv dist/${{ matrix.package }}*.whl tmp/
-        rm -rf dist
-        mv tmp dist
+        /build/venv/bin/build-python whl_rm.py ${{ matrix.package }}
 
     # Upload package so that users can download the package directly
     # by just issuing a PR
