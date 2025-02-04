@@ -24,6 +24,8 @@ if __name__ == "__main__":
     except KeyError:
         parser.error(f"{args.project} not found in {args.config}")
 
+    name = pkgdata.get("name", args.project)
+
     env = os.environ.copy()
     env["PATH"] = f"{env['PATH']}:/build/venv/build/bin"
     if "environment" in pkgdata:
@@ -46,13 +48,13 @@ if __name__ == "__main__":
     if "pip_args" in pkgdata:
         pipargs += pkgdata["pip_args"]
 
-    pipargs.append(f"{args.project}=={version}")
+    pipargs.append(f"{name}=={version}")
 
     result = subprocess.run(pipargs, env=env)
 
     # Sets variable for use in github actions
     if result.returncode == 0:
-        project_cvt = args.project.replace("-", "_")
+        project_cvt = name.replace("-", "_")
         for f in glob.glob(f"dist/{project_cvt}-{version}-*.whl"):
             print(f"::set-output name=wheel::{f}")
 

@@ -25,6 +25,7 @@ jobs:
         - Cython
         - debugpy
         - numpy
+        - numpy-no-openblas
         - pydevd
         - pyinstrument
         - PyYAML
