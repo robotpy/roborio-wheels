@@ -81,8 +81,8 @@ build_pip_requirements = [
 version = "2.0.7"
 build_pip_requirements = [
     "setuptools",
-    "Cython>=3.0",
-    "numpy==2.2.1",
+    "Cython==3.0.10",
+    "numpy",
 ]
 pre_script = "scripts/build_geos.sh"
 
