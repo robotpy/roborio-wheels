@@ -26,6 +26,13 @@ if __name__ == "__main__":
 
     name = pkgdata.get("name", args.project)
 
+    try:
+        pre_script = pkgdata["pre_script"]
+    except KeyError:
+        pass
+    else:
+        os.system(pre_script)
+
     env = os.environ.copy()
     env["PATH"] = f"{env['PATH']}:/build/venv/build/bin"
     if "environment" in pkgdata:
