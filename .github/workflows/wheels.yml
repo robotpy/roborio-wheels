@@ -29,11 +29,15 @@ jobs:
         - pydevd
         - pyinstrument
         - PyYAML
+        - shapely
         - yappi
         - zope.interface
 
     steps:
     - uses: actions/checkout@v4
+
+    # temporary fix needed for shapely
+    - run: apt-get update && apt-get install -y bzip2
 
     # temporary fix
     - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025/simple
