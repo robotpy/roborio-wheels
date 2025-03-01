@@ -78,10 +78,10 @@ build_pip_requirements = [
 # version = "1.5.3"
 
 [packages.shapely]
-version = "2.0.7"
+version = "1.8.5"
 build_pip_requirements = [
     "setuptools",
-    "Cython==3.0.10",
+    "Cython>=3.0",
     "numpy",
 ]
 pre_script = "scripts/build_geos.sh"
