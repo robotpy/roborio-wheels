@@ -84,10 +84,9 @@ build_pip_requirements = [
     "Cython>=3.0",
     "setuptools_scm",
 ]
+[project]
+dynamic = ["version"]
 [tool.setuptools_scm]
-# pip_args = [
-#     "--use-deprecated=legacy-resolver",
-# ]
 
 
 [packages."zope.interface"]
