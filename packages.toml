@@ -84,8 +84,6 @@ build_pip_requirements = [
 ]
 pip_args = [
     "--use-deprecated=legacy-resolver",
-    "--no-build-isolation",
-    "--no-clean"
 ]
 
 
