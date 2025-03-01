@@ -29,7 +29,7 @@ jobs:
         - pydevd
         - pyinstrument
         - PyYAML
-        - shapely
+        - pyclipper
         - yappi
         - zope.interface
 
