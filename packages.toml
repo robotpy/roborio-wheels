@@ -81,6 +81,7 @@ build_pip_requirements = [
 version = "1.3.0.post6"
 build_pip_requirements = [
     "Cython>=3.0",
+    "setuptools_scm"
 ]
 pip_args = [
     "--use-deprecated=legacy-resolver",
