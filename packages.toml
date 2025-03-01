@@ -77,17 +77,17 @@ build_pip_requirements = [
 # [packages.scipy]
 # version = "1.5.3"
 
-[packages.shapely]
-version = "1.8.5"
-build_pip_requirements = [
-    "setuptools",
-    "Cython>=3.0",
-    "numpy",
-]
-pre_script = "scripts/build_geos.sh"
+[packages.pyclipper]
+version = "1.3.0.post6"
+# build_pip_requirements = [
+#     "setuptools",
+#     "Cython>=3.0",
+#     "numpy",
+# ]
+# pre_script = "scripts/build_geos.sh"
 
-[packages.shapely.environment]
-GEOS_CONFIG = "/usr/local/arm-nilrt-linux-gnueabi/sysroot/usr/bin/geos-config"
+# [packages.pyclipper.environment]
+# GEOS_CONFIG = "/usr/local/arm-nilrt-linux-gnueabi/sysroot/usr/bin/geos-config"
 
 
 [packages."zope.interface"]
