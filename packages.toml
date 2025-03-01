@@ -82,12 +82,8 @@ version = "1.3.0.post6"
 build_pip_requirements = [
     "setuptools",
     "Cython>=3.0",
-    "setuptools_scm",
+    "setuptools_scm==7.1.0",
 ]
-[project]
-dynamic = ["version"]
-[tool.setuptools_scm]
-
 
 [packages."zope.interface"]
 version = "7.1.0"
