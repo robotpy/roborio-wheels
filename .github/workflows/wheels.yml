@@ -73,11 +73,32 @@ jobs:
       run: |
         /build/venv/bin/cross-python whl_build.py ${{ matrix.package }}
 
+    # - if: steps.check.outputs.should_build == 'true'
+    #   name: Modify ${{ matrix.package }} wheel
+    #   shell: bash
+    #   run: |
+    #     /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }} ${{ steps.build.outputs.wheel }}
+    #     ls dist/*
+
     - if: steps.check.outputs.should_build == 'true'
       name: Modify ${{ matrix.package }} wheel
       shell: bash
       run: |
-        /build/venv/bin/cross-python whl_mod.py ${{ matrix.package }} ${{ steps.build.outputs.wheel }}
+        # Grab the package name from the matrix
+        PACKAGE="${{ matrix.package }}"
+      
+        if [ "$PACKAGE" = "pyclipper" ]; then
+          # Find any wheel that starts with "pyclipper" in dist/
+          WHEEL_PATH="$(ls dist/pyclipper*.whl | head -n 1)"
+          echo "Using wheel for pyclipper: $WHEEL_PATH"
+    
+          /build/venv/bin/cross-python whl_mod.py "$PACKAGE" "$WHEEL_PATH"
+        else
+          # For all other packages, use the wheel from build.outputs
+          /build/venv/bin/cross-python whl_mod.py "$PACKAGE" "${{ steps.build.outputs.wheel }}"
+        fi
+        
+        # Show what's in dist/ for debugging
         ls dist/*
 
     # Some packages are stupid
