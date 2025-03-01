@@ -78,12 +78,15 @@ build_pip_requirements = [
 # version = "1.5.3"
 
 [packages.pyclipper]
-version = "1.3.0"
+version = "1.3.0.post6"
 # build_pip_requirements = [
 #     "setuptools",
 #     "Cython>=3.0",
 #     "numpy",
 # ]
+pip_args = [
+    "--use-deprecated=legacy-resolver",
+]
 # pre_script = "scripts/build_geos.sh"
 
 # [packages.pyclipper.environment]
