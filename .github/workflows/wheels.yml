@@ -26,6 +26,7 @@ jobs:
         - debugpy
         - numpy
         - numpy-no-openblas
+        - pyclipper
         - pydevd
         - pyinstrument
         - PyYAML
