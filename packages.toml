@@ -97,6 +97,8 @@ pre_script = "scripts/build_geos.sh"
 [packages.shapely.environment]
 GEOS_CONFIG = "/usr/local/arm-nilrt-linux-gnueabi/sysroot/usr/bin/geos-config"
 
+[packages.tornado]
+version = "6.4.2"
 
 [packages."zope.interface"]
 version = "7.1.0"
