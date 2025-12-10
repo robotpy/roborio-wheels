@@ -113,6 +113,7 @@ jobs:
       uses: actions/download-artifact@v5
       with:
         path: dist
+        merge-multiple: true
 
     - name: Publish package to WPILib artifactory
       if: github.event_name == 'push' && github.event.ref == 'refs/heads/2026'
