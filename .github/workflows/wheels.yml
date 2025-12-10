@@ -12,7 +12,7 @@ jobs:
 
   cross-build:
     runs-on: ubuntu-latest
-    container: wpilib/roborio-cross-ubuntu:2025-22.04-py313
+    container: wpilib/roborio-cross-ubuntu:2026-22.04-py314
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +24,7 @@ jobs:
         package:
         - Cython
         - debugpy
-        - numpy
+        # - numpy
         - numpy-no-openblas
         - pyclipper
         - pydevd
@@ -42,7 +42,7 @@ jobs:
     - run: apt-get update && apt-get install -y bzip2
 
     # temporary fix
-    - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025/simple
+    - run: /build/venv/bin/cross-python -m pip config set global.extra-index-url https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2026/simple
 
     - shell: bash
       name: install meson cross-file
@@ -105,11 +105,11 @@ jobs:
     #
 
     - name: Publish package to WPILib artifactory
-      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2025'
+      if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2026'
       # https://github.com/pypa/gh-action-pypi-publish/issues/300
       uses: pypa/gh-action-pypi-publish@release/v1.11
       with:
         user: ${{ secrets.WPI_ARTIFACTORY_USERNAME }}
         password: ${{ secrets.WPI_ARTIFACTORY_TOKEN }}
-        repository-url: https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2025-local
+        repository-url: https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2026-local
 
