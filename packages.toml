@@ -47,7 +47,8 @@ version = "1.8.17"
 # "numpy/_distributor_init_local.py" = "numpy-files/_distributor_init_local.py"
 
 # Build numpy without openblas support (lower performance, lower memory.. but doesn't seem to matter)
-[packages.numpy-no-openblas]
+# [packages.numpy-no-openblas]
+[packages.numpy]
 name = "numpy"
 version = "2.3.5"
 # mod_version = "2.2.1.dev0"
@@ -56,14 +57,14 @@ pip_args = [
     "--config-settings=setup-args=--cross-file=meson-cross-roborio.txt",
 ]
 
-
-[packages.pyclipper]
-version = "1.4.0"
-build_pip_requirements = [
-    "setuptools",
-    "Cython>=3.0",
-    "setuptools_scm==7.1.0",
-]
+# TODO seems to be broken for 2026
+# [packages.pyclipper]
+# version = "1.4.0"
+# build_pip_requirements = [
+#     "setuptools",
+#     "Cython>=3.0",
+#     "setuptools_scm==7.1.0",
+# ]
 
 [packages.pydevd]
 version = "3.4.1"
@@ -85,17 +86,18 @@ build_pip_requirements = [
 # [packages.scipy]
 # version = "1.5.3"
 
-[packages.shapely]
-version = "2.1.2"
-build_pip_requirements = [
-    "setuptools",
-    "Cython>=3.0",
-    "numpy",
-]
-pre_script = "scripts/build_geos.sh"
+# TODO seems to be broken for 2026
+# [packages.shapely]
+# version = "2.1.2"
+# build_pip_requirements = [
+#     "setuptools",
+#     "Cython>=3.0",
+#     "numpy",
+# ]
+# pre_script = "scripts/build_geos.sh"
 
-[packages.shapely.environment]
-GEOS_CONFIG = "/usr/local/arm-nilrt-linux-gnueabi/sysroot/usr/bin/geos-config"
+# [packages.shapely.environment]
+# GEOS_CONFIG = "/usr/local/arm-nilrt-linux-gnueabi/sysroot/usr/bin/geos-config"
 
 [packages.tornado]
 version = "6.5.2"

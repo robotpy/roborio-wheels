@@ -3,6 +3,7 @@
 import argparse
 import glob
 import os
+import packaging.utils
 import sys
 import subprocess
 import tomllib
@@ -61,7 +62,8 @@ if __name__ == "__main__":
 
     # Sets variable for use in github actions
     if result.returncode == 0:
-        project_cvt = name.replace("-", "_")
+        project_cvt = packaging.utils.canonicalize_name(name)
+        project_cvt = project_cvt.replace(".", "_")
         for f in glob.glob(f"dist/{project_cvt}-{version}-*.whl"):
             print(f"::set-output name=wheel::{f}")
 
