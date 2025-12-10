@@ -101,6 +101,7 @@ jobs:
         path: dist/
 
   publish:
+    runs-on: ubuntu-latest
     if: ${{ always() }}
     needs: cross-build
 
