@@ -24,8 +24,8 @@ jobs:
         package:
         - Cython
         - debugpy
-        # - numpy
-        - numpy-no-openblas
+        - numpy
+        # - numpy-no-openblas this is default now
         - pyclipper
         - pydevd
         - pyinstrument

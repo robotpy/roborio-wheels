@@ -47,7 +47,8 @@ version = "1.8.17"
 # "numpy/_distributor_init_local.py" = "numpy-files/_distributor_init_local.py"
 
 # Build numpy without openblas support (lower performance, lower memory.. but doesn't seem to matter)
-[packages.numpy-no-openblas]
+# [packages.numpy-no-openblas]
+[packages.numpy]
 name = "numpy"
 version = "2.3.5"
 # mod_version = "2.2.1.dev0"
