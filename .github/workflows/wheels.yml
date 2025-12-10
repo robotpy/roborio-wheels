@@ -106,8 +106,7 @@ jobs:
 
     - name: Publish package to WPILib artifactory
       if: steps.check.outputs.should_build == 'true' && github.event_name == 'push' && github.event.ref == 'refs/heads/2026'
-      # https://github.com/pypa/gh-action-pypi-publish/issues/300
-      uses: pypa/gh-action-pypi-publish@release/v1.11
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: ${{ secrets.WPI_ARTIFACTORY_USERNAME }}
         password: ${{ secrets.WPI_ARTIFACTORY_TOKEN }}
