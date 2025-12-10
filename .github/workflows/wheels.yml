@@ -26,11 +26,11 @@ jobs:
         - debugpy
         - numpy
         # - numpy-no-openblas this is default now
-        - pyclipper
+        # - pyclipper
         - pydevd
         - pyinstrument
         - PyYAML
-        - shapely
+        # - shapely
         - tornado
         - yappi
         - zope.interface
