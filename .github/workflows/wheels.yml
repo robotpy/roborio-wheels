@@ -30,6 +30,7 @@ jobs:
         - pydevd
         - pyinstrument
         - PyYAML
+        - scipy
         # - shapely
         - tornado
         - yappi
