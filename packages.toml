@@ -50,7 +50,7 @@ version = "1.8.17"
 # [packages.numpy-no-openblas]
 [packages.numpy]
 name = "numpy"
-version = "2.3.5"
+version = "2.4.1"
 # mod_version = "2.2.1.dev0"
 build_pip_requirements = ["Cython>=3.0.6", "meson-python>=0.18.0", "ninja", "pkgconf"]
 pip_args = [
