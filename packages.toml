@@ -82,9 +82,20 @@ build_pip_requirements = [
     "Cython>=3.0",
 ]
 
-# TODO
-# [packages.scipy]
-# version = "1.5.3"
+[packages.scipy]
+version = "1.16.3"
+build_pip_requirements = [
+    "meson-python>=0.18.0",
+    "Cython>=3.0.8",
+    "pybind11>=2.13.2",
+    "pythran>=0.14.0",
+    "numpy",
+    "ninja",
+    "pkgconf",
+]
+pip_args = [
+    "--config-settings=setup-args=--cross-file=meson-cross-roborio.txt",
+]
 
 # TODO seems to be broken for 2026
 # [packages.shapely]

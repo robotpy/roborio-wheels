@@ -6,6 +6,7 @@ cpp = 'arm-frc2025-linux-gnueabi-g++'
 ar = 'arm-frc2025-linux-gnueabi-ar'
 strip = 'arm-frc2025-linux-gnueabi-strip'
 gfortran = 'arm-frc2025-linux-gnueabi-gfortran'
+fortran = 'arm-frc2025-linux-gnueabi-gfortran'
 
 # requires pkgconf to be installed in build-pip
 pkg-config = '/build/venv/build/bin/pkgconf'
